@@ -2,7 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { ExternalLink, Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -50,11 +50,11 @@ const EarningsCalculator = () => {
           <h2 className="text-2xl font-light text-foreground">Try it out</h2>
           <Card className="bg-card border-border">
             <CardContent className="p-6 space-y-4">
-              <Textarea
-                placeholder="Paste financial statement data or describe the company..."
+              <Input
+                placeholder="Enter stock ticker (e.g., AAPL)"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="min-h-[120px]"
+                className="uppercase"
               />
               <Button 
                 onClick={handleInvoke} 
