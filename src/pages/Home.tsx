@@ -53,7 +53,7 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
+      <main className="max-w-4xl mx-auto px-6 pt-6 pb-12 space-y-10">
         {/* Hero Section */}
         <section className="flex items-start justify-between gap-8 flex-wrap">
           <div className="space-y-4 flex-1 min-w-[300px]">
