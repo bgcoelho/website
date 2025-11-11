@@ -79,7 +79,7 @@ const Home = () => {
         </section>
 
         {/* About Section */}
-        <section className="space-y-6">
+        <section className="space-y-2">
           <h2 className="text-3xl font-light text-foreground">About</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Problem solver with AI and Machine Learning. Currently Head of Data at a global Insurance group, 
