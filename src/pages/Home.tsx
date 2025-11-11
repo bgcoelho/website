@@ -128,26 +128,47 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Prompt Library Section */}
+        {/* Resources Section */}
         <section className="space-y-8">
           <h2 className="text-3xl font-light text-foreground">Resources</h2>
-          <Card className="bg-card border-border hover:shadow-md transition-shadow">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                My Prompt Library
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Curated collection of AI and LLM prompts for data, strategy, and product applications
-              </p>
-              <a
-                href="/prompts"
-                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
-              >
-                <span>Explore Prompts</span>
-                <span>→</span>
-              </a>
-            </CardContent>
-          </Card>
+          <div className="space-y-4">
+            <Card className="bg-card border-border hover:shadow-md transition-shadow">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  My Prompt Library
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Curated collection of AI and LLM prompts for data, strategy, and product applications
+                </p>
+                <a
+                  href="/prompts"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+                >
+                  <span>Explore Prompts</span>
+                  <span>→</span>
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="bg-card border-border hover:shadow-md transition-shadow">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  SENSORNETS 2014: LA6-Local Aggregation in the IoT
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Research publication on wireless sensor networks and local aggregation techniques for Internet of Things applications
+                </p>
+                <a
+                  href="https://www.scitepress.org/PublicationsDetail.aspx?ID=hGUOwZL0J3c=&t=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+                >
+                  <span>View Publication</span>
+                  <span>→</span>
+                </a>
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
         {/* Contact Section */}
