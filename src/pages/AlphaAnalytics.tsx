@@ -67,7 +67,7 @@ const AlphaAnalytics = () => {
                     Analyzing Stock...
                   </>
                 ) : (
-                  "Analyze Alpha"
+                  "Analyze stock"
                 )}
               </Button>
             </CardContent>
