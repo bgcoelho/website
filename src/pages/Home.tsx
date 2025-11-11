@@ -99,7 +99,7 @@ const Home = () => {
           <div className="space-y-4">
             {academics.map((academic, index) => (
               <Card key={index} className="bg-card border-border">
-                <CardContent className="p-6">
+                <CardContent className="py-4 px-5">
                   <h3 className="text-lg font-semibold text-foreground mb-1">
                     {academic.title}
                   </h3>
@@ -117,7 +117,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-4">
             {certifications.map((cert, index) => (
               <Card key={index} className="bg-card border-border">
-                <CardContent className="p-6">
+                <CardContent className="py-4 px-5">
                   <h3 className="text-base font-semibold text-foreground mb-1">
                     {cert.name}
                   </h3>
@@ -133,7 +133,7 @@ const Home = () => {
           <h2 className="text-3xl font-light text-foreground">Resources</h2>
           <div className="space-y-4">
             <Card className="bg-card border-border hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
+              <CardContent className="py-4 px-5">
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   My Prompt Library
                 </h3>
@@ -150,7 +150,7 @@ const Home = () => {
               </CardContent>
             </Card>
             <Card className="bg-card border-border hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
+              <CardContent className="py-4 px-5">
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   SENSORNETS 2014: LA6-Local Aggregation in the IoT
                 </h3>
