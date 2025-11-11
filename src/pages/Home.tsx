@@ -84,7 +84,7 @@ const Home = () => {
         </section>
 
         {/* Projects Section */}
-        <section className="space-y-8">
+        <section className="space-y-4">
           <h2 className="text-3xl font-light text-foreground">AI Product Portfolio & Experiments</h2>
           <div className="grid gap-4">
             {projects.map((project, index) => (
@@ -94,7 +94,7 @@ const Home = () => {
         </section>
 
         {/* Academics Section */}
-        <section className="space-y-8">
+        <section className="space-y-4">
           <h2 className="text-3xl font-light text-foreground">Academics</h2>
           <div className="space-y-4">
             {academics.map((academic, index) => (
@@ -112,7 +112,7 @@ const Home = () => {
         </section>
 
         {/* Certifications Section */}
-        <section className="space-y-8">
+        <section className="space-y-4">
           <h2 className="text-3xl font-light text-foreground">Trainings & Certifications</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {certifications.map((cert, index) => (
@@ -129,7 +129,7 @@ const Home = () => {
         </section>
 
         {/* Resources Section */}
-        <section className="space-y-8">
+        <section className="space-y-4">
           <h2 className="text-3xl font-light text-foreground">Resources</h2>
           <div className="space-y-4">
             <Card className="bg-card border-border hover:shadow-md transition-shadow">
@@ -172,7 +172,7 @@ const Home = () => {
         </section>
 
         {/* Contact Section */}
-        <section className="space-y-8">
+        <section className="space-y-4">
           <h2 className="text-3xl font-light text-foreground">Contact</h2>
           <div className="flex flex-wrap gap-4">
             <a
