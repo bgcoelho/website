@@ -1,9 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 const UnderwritingRisk = () => {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInvoke = async () => {
+    if (!input.trim()) return;
+    
+    setIsLoading(true);
+    // Simulate API call - replace with actual implementation
+    setTimeout(() => {
+      setResult("Risk Assessment Complete.\n\nRisk Score: 67/100 (Medium Risk)\n\nKey Factors:\n• Credit history shows consistent payment patterns\n• Property location in moderate risk zone\n• Coverage amount within acceptable thresholds\n\nRecommendation: Approve with standard premium adjustment of +12%");
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -27,48 +45,48 @@ const UnderwritingRisk = () => {
           <Badge variant="secondary">LLM</Badge>
         </div>
 
-        {/* Overview */}
+        {/* Interactive Demo */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Overview</h2>
+          <h2 className="text-2xl font-light text-foreground">Try it out</h2>
           <Card className="bg-card border-border">
-            <CardContent className="p-6">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                This intelligent underwriting system combines large language models with proprietary risk assessment algorithms to evaluate insurance applications. The engine aggregates data from multiple sources including internal databases and public records to provide comprehensive risk profiles and automated underwriting decisions.
-              </p>
+            <CardContent className="p-6 space-y-4">
+              <Textarea
+                placeholder="Enter applicant information (name, age, location, coverage amount, etc.)..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="min-h-[120px]"
+              />
+              <Button 
+                onClick={handleInvoke} 
+                disabled={isLoading || !input.trim()}
+                className="w-full"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Assessing Risk...
+                  </>
+                ) : (
+                  "Assess Risk"
+                )}
+              </Button>
             </CardContent>
           </Card>
         </section>
 
-        {/* Key Features */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Key Features</h2>
-          <div className="grid gap-4">
+        {/* Results */}
+        {result && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-light text-foreground">Results</h2>
             <Card className="bg-card border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Multi-Source Data Integration</h3>
-                <p className="text-sm text-muted-foreground">
-                  Combines user information with internal databases and public records for comprehensive risk assessment
+                <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">
+                  {result}
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Intelligent Risk Scoring</h3>
-                <p className="text-sm text-muted-foreground">
-                  Uses AI to analyze complex patterns and generate accurate risk scores
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Automated Decision Making</h3>
-                <p className="text-sm text-muted-foreground">
-                  Provides instant underwriting decisions based on configurable risk thresholds
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* GitHub Link */}
         <section>

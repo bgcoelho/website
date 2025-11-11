@@ -1,9 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 const EarningsCalculator = () => {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInvoke = async () => {
+    if (!input.trim()) return;
+    
+    setIsLoading(true);
+    // Simulate API call - replace with actual implementation
+    setTimeout(() => {
+      setResult("Analysis complete. Based on the financial statements provided, adjusted earnings show a compound annual growth rate of 12.5% over the past 10 years. Projected earnings for the next fiscal year: $2.3M with a confidence interval of ±15%.");
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -27,48 +45,48 @@ const EarningsCalculator = () => {
           <Badge variant="secondary">LLM</Badge>
         </div>
 
-        {/* Overview */}
+        {/* Interactive Demo */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Overview</h2>
+          <h2 className="text-2xl font-light text-foreground">Try it out</h2>
           <Card className="bg-card border-border">
-            <CardContent className="p-6">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                This project leverages large language models to analyze financial statements and automatically calculate adjusted earnings metrics. The system processes historical data spanning 10 years, identifies key financial indicators, and uses machine learning algorithms to project future earnings with confidence intervals.
-              </p>
+            <CardContent className="p-6 space-y-4">
+              <Textarea
+                placeholder="Paste financial statement data or describe the company..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="min-h-[120px]"
+              />
+              <Button 
+                onClick={handleInvoke} 
+                disabled={isLoading || !input.trim()}
+                className="w-full"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  "Calculate Earnings"
+                )}
+              </Button>
             </CardContent>
           </Card>
         </section>
 
-        {/* Key Features */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Key Features</h2>
-          <div className="grid gap-4">
+        {/* Results */}
+        {result && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-light text-foreground">Results</h2>
             <Card className="bg-card border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Automated Financial Statement Analysis</h3>
-                <p className="text-sm text-muted-foreground">
-                  Uses NLP to extract and interpret complex financial data from various statement formats
+                <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">
+                  {result}
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">10-Year Historical Calculation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Computes adjusted earnings across a decade to identify trends and patterns
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Predictive Analytics</h3>
-                <p className="text-sm text-muted-foreground">
-                  Projects future earnings based on historical patterns and market indicators
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* GitHub Link */}
         <section>

@@ -1,9 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 const AlphaAnalytics = () => {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInvoke = async () => {
+    if (!input.trim()) return;
+    
+    setIsLoading(true);
+    // Simulate API call - replace with actual implementation
+    setTimeout(() => {
+      setResult("Stock Analysis Complete.\n\nAlpha: +3.2% (Outperforming market)\nBeta: 1.15 (Slightly more volatile than market)\n\nKey Insights from SEC 10-K:\n• Strong revenue growth in core business segments\n• Expanding margins due to operational efficiency\n• Strategic investments in emerging technologies\n\nInvestment Recommendation: BUY with price target of $145 (+18% upside)");
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -27,48 +45,48 @@ const AlphaAnalytics = () => {
           <Badge variant="secondary">Alpha Prediction</Badge>
         </div>
 
-        {/* Overview */}
+        {/* Interactive Demo */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Overview</h2>
+          <h2 className="text-2xl font-light text-foreground">Try it out</h2>
           <Card className="bg-card border-border">
-            <CardContent className="p-6">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                This advanced analytics platform uses machine learning to calculate stock alpha (excess returns) and beta coefficients. The system analyzes SEC 10-K filings, performs strategic market analysis, and combines quantitative metrics with qualitative insights to generate actionable investment recommendations.
-              </p>
+            <CardContent className="p-6 space-y-4">
+              <Textarea
+                placeholder="Enter stock ticker symbol or company name to analyze..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="min-h-[120px]"
+              />
+              <Button 
+                onClick={handleInvoke} 
+                disabled={isLoading || !input.trim()}
+                className="w-full"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Analyzing Stock...
+                  </>
+                ) : (
+                  "Analyze Alpha"
+                )}
+              </Button>
             </CardContent>
           </Card>
         </section>
 
-        {/* Key Features */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Key Features</h2>
-          <div className="grid gap-4">
+        {/* Results */}
+        {result && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-light text-foreground">Results</h2>
             <Card className="bg-card border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Alpha & Beta Calculation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Accurately determines excess returns and market correlation using historical data
+                <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">
+                  {result}
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">SEC Filing Analysis</h3>
-                <p className="text-sm text-muted-foreground">
-                  Automatically reviews and extracts insights from 10-K reports and other regulatory filings
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Strategic Market Analysis</h3>
-                <p className="text-sm text-muted-foreground">
-                  Combines quantitative metrics with qualitative market and competitive analysis
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* GitHub Link */}
         <section>

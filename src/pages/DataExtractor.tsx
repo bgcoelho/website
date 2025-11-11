@@ -1,9 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 const DataExtractor = () => {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInvoke = async () => {
+    if (!input.trim()) return;
+    
+    setIsLoading(true);
+    // Simulate API call - replace with actual implementation
+    setTimeout(() => {
+      setResult("Data Extraction Complete.\n\nExtracted Fields:\n• Policy Number: POL-2024-8765\n• Applicant Name: John Smith\n• Coverage Amount: $500,000\n• Effective Date: 2024-03-15\n• Premium: $2,400/year\n\nValidation Status: ✓ All fields match database records\nDiscrepancies Found: None");
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -27,48 +45,48 @@ const DataExtractor = () => {
           <Badge variant="secondary">LLM</Badge>
         </div>
 
-        {/* Overview */}
+        {/* Interactive Demo */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Overview</h2>
+          <h2 className="text-2xl font-light text-foreground">Try it out</h2>
           <Card className="bg-card border-border">
-            <CardContent className="p-6">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                This intelligent document processing system uses large language models to extract structured data from unstructured email communications and documents. The solution is specifically designed for insurance underwriting workflows, automatically reconciling submission and bind data with existing database records to ensure data accuracy and consistency.
-              </p>
+            <CardContent className="p-6 space-y-4">
+              <Textarea
+                placeholder="Paste email content or unstructured document text..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="min-h-[120px]"
+              />
+              <Button 
+                onClick={handleInvoke} 
+                disabled={isLoading || !input.trim()}
+                className="w-full"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Extracting Data...
+                  </>
+                ) : (
+                  "Extract Data"
+                )}
+              </Button>
             </CardContent>
           </Card>
         </section>
 
-        {/* Key Features */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-light text-foreground">Key Features</h2>
-          <div className="grid gap-4">
+        {/* Results */}
+        {result && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-light text-foreground">Results</h2>
             <Card className="bg-card border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Email Content Analysis</h3>
-                <p className="text-sm text-muted-foreground">
-                  Automatically reads and interprets unstructured email communications between underwriters and support teams
+                <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">
+                  {result}
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Data Reconciliation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Compares extracted data with database records to identify discrepancies and ensure accuracy
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-primary mb-2">Automated Data Validation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Validates extracted information against business rules and database constraints
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* GitHub Link */}
         <section>
