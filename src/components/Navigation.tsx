@@ -6,7 +6,6 @@ export const Navigation = () => {
 
   const links = [
     { name: "Home", path: "/" },
-    { name: "Prompt Library", path: "/prompts" },
   ];
 
   return (
