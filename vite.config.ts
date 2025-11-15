@@ -19,7 +19,7 @@ const copy404Plugin = () => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/website/",
+  base: "/about/",
   server: {
     host: "::",
     port: 8080,
