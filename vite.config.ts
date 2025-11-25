@@ -1,30 +1,46 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { copyFileSync } from "fs";
+import fs from "fs";
 
-// Plugin to copy index.html to 404.html for GitHub Pages SPA routing
-const copy404Plugin = () => ({
-  name: "copy-404",
-  closeBundle() {
-    copyFileSync("dist/index.html", "dist/404.html");
-    // Copy .nojekyll if it exists in public folder
-    try {
-      copyFileSync("public/.nojekyll", "dist/.nojekyll");
-    } catch (e) {
-      // File doesn't exist, that's okay
+function githubPagesSpaFix() {
+  return {
+    name: "github-pages-spa-fix",
+    writeBundle() {
+      const dist = "dist";
+      const index = `${dist}/index.html`;
+      const notFound = `${dist}/404.html`;
+
+      if (fs.existsSync(index)) {
+        fs.copyFileSync(index, notFound);
+        console.log("✔ 404.html copied from index.html");
+      } else {
+        console.warn("⚠ index.html not found — skipping 404.html creation");
+      }
+
+      // Copy CNAME if exists
+      if (fs.existsSync("public/CNAME")) {
+        fs.copyFileSync("public/CNAME", `${dist}/CNAME`);
+        console.log("✔ CNAME copied");
+      } else {
+        console.warn("⚠ CNAME not found in public/");
+      }
+
+      // Copy .nojekyll if exists
+      if (fs.existsSync("public/.nojekyll")) {
+        fs.copyFileSync("public/.nojekyll", `${dist}/.nojekyll`);
+        console.log("✔ .nojekyll copied");
+      } else {
+        console.warn("⚠ .nojekyll not found in public/");
+      }
     }
-  },
-});
+  };
+}
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: "/",
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [react(), copy404Plugin()],
+  plugins: [react(), githubPagesSpaFix()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
